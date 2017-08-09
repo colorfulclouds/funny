@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "ball_game"=".\ball_game.dsp" - Package Owner=<4>
+Project: "gitignore_test"=".\gitignore_test.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{
