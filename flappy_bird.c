@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
+#include <time.h>
 
 int bird_x;
 int bird_y;
@@ -12,6 +13,8 @@ int width;
 int handicap_top;
 int handicap_down;
 int handicap_y;
+
+int score;
 
 
 void gotoxy(int x , int y)
@@ -34,6 +37,8 @@ void startup()
 	handicap_top = high / 3;
 	handicap_down = high / 3 * 2;
 	handicap_y = width / 3 * 2;
+
+	score = 0;
 }
 
 void show()
@@ -59,6 +64,8 @@ void show()
 		}
 		printf("\n");
 	}
+
+	printf("score:%d\n", score);
 	Sleep(50);
 }
 
@@ -89,6 +96,7 @@ void update_without_input()
 	static int speed_bird = 10;
 
 	static int speed_handicap = 10;
+int tmp;
 
 	speed_bird --;
 
@@ -109,7 +117,30 @@ void update_without_input()
 		speed_handicap = 10;
 
 		if(handicap_y < 0)
+		{
+			//bird fly to the side of the wall
+			srand((unsigned int)time(NULL));
 			handicap_y = width / 3 * 2;
+			handicap_top = rand() % (high / 3) + 1;
+			handicap_down = handicap_top + rand() % 6 + 2;
+			
+		}
+	}
+
+	if(bird_y == handicap_y)
+	{
+		if(bird_x >= handicap_top && bird_x <= handicap_down)
+		{
+			if(speed_handicap == 10)
+				score ++;
+		}
+		else
+		{
+			printf("game over\n");
+			getchar();
+			exit(EXIT_SUCCESS);
+		}
+		
 	}
 }
 
