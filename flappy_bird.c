@@ -96,14 +96,19 @@ void update_without_input()
 	static int speed_bird = 10;
 
 	static int speed_handicap = 10;
-int tmp;
 
-	speed_bird --;
+	static int delta_speed = 1;
+
+	//speed up to down to the ground
+	speed_bird -= delta_speed++;
+	if(delta_speed == 5)
+		delta_speed = 1;
 
 	if(speed_bird == 0)
 	{
 		bird_x ++;	//down to ground
 		speed_bird = 10;
+		delta_speed = 1;
 
 		//replace prime
 		if(bird_x > high)
